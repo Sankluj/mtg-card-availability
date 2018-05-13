@@ -1,13 +1,23 @@
 const { send } = require('micro');
+const query = require('micro-query');
 
 const { getAvailabilityByCardName } = require('./src/index.js');
 
 module.exports = async (req, res) => {
+  const { cardName } = query(req);
+
   try {
-    const availability = await getAvailabilityByCardName('Teferi');
-    send(res, 200, availability);
-  } catch (e) {
-    console.log(e);
-    res.end('Error');
+    if (!cardName) {
+      throw {
+        errorCode: 400,
+        errorMessage: 'No card name provided'
+      };
+    }
+
+    const availability = await getAvailabilityByCardName(cardName);
+
+    return send(res, 200, availability);
+  } catch ({ errorCode = 500, errorMessage }) {
+    return send(res, errorCode, { errorCode, errorMessage });
   }
 };

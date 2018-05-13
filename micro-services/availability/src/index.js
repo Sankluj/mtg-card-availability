@@ -1,7 +1,7 @@
 const pool = require('./db/index.js');
 
 const getCardIdByCardName = async cardName => {
-  const { rows: [ { did: cardId } ] } = await pool.query(`
+  const { rows: [ { did: cardId } = { } ] } = await pool.query(`
     SELECT DID
     FROM CARDS
     WHERE CARDS.NAME LIKE $1
@@ -12,6 +12,13 @@ const getCardIdByCardName = async cardName => {
 
 const getAvailabilityByCardName = async cardName => {
   const cardId = await getCardIdByCardName(cardName);
+
+  if (!cardId) {
+    throw {
+      errorCode: 404,
+      errorMessage: 'No cards found with this name'
+    };
+  }
 
   const { rows } = await pool.query(`
     SELECT
