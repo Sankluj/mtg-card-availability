@@ -1,10 +1,11 @@
-const pool = require('./src/db/index.js');
 const { send } = require('micro');
+
+const { getAvailabilityByCardName } = require('./src/index.js');
 
 module.exports = async (req, res) => {
   try {
-    const { rows } = await pool.query('SELECT NOW()');
-    send(res, 200, rows);
+    const availability = await getAvailabilityByCardName('Teferi');
+    send(res, 200, availability);
   } catch (e) {
     console.log(e);
     res.end('Error');
