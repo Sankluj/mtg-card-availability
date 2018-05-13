@@ -1,0 +1,19 @@
+{
+  "name": "mtg-card-availability",
+  "version": "1.0.0",
+  "description": "lets you know if a specific card is owned by one of the magicians",
+  "main": "index.js",
+  "scripts": {
+    "start": "micro",
+    "dev": "micro-dev"
+  },
+  "author": "Sankluj",
+  "license": "ISC",
+  "dependencies": {
+    "micro": "^9.3.0",
+    "pg": "^7.4.3"
+  },
+  "devDependencies": {
+    "micro-dev": "^2.2.2"
+  }
+}

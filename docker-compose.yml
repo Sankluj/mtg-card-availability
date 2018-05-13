@@ -1,0 +1,20 @@
+version: '3.1'
+services:
+  card-availability:
+    command: npm run dev
+    build: ./micro-services/availability
+    volumes:
+      - ./micro-services/availability:/mnt
+    environment:
+      - PGPASSWORD=dbpassword
+      - PGUSER=dbuser
+      - PGDATABASE=dbuser
+      - PGHOST=db
+    ports:
+      - "8080:3000"
+  db:
+    build: ./db
+    environment:
+      - POSTGRES_PASSWORD=dbpassword
+      - POSTGRES_USER=dbuser
+      - POSTGRES_DB=dbuser
