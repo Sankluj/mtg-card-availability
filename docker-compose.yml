@@ -12,6 +12,8 @@ services:
       - PGHOST=db
     ports:
       - "8080:3000"
+    depends_on:
+      - "db"
   db:
     build: ./db
     environment:
