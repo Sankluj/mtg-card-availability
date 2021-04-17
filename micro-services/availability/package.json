@@ -11,10 +11,10 @@
   "license": "ISC",
   "dependencies": {
     "micro": "^9.3.0",
-    "micro-query": "^0.2.0",
+    "micro-query": "^0.3.0",
     "pg": "^7.4.3"
   },
   "devDependencies": {
-    "micro-dev": "^2.2.2"
+    "micro-dev": "^3.0.0"
   }
 }
